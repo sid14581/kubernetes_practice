@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-nginx-replica
+  labels:
+    tier: front-end-app
+    name: myapp-nginx
+spec:
+  selector:
+    matchLabels:
+      tier: front-end-app
+      name: myapp-nginx
+  replicas: 3
+
+  template:
+    metadata:
+      name: myapp-nginx-pod
+      labels:
+        name: myapp-nginx
+        tier: front-end-app
+    spec:
+      containers:
+        - image: nginx
+          name: myapp-nginx-container
+          ports:
+          - containerPort: 80
+
+        
